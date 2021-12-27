@@ -2,6 +2,7 @@
 exports.up = knex =>
   knex.schema.createTableIfNotExists('users', table => {
       table.increments("id")
+      table.text("name").notNullable()
       table.text("email").unique().notNullable()
       table.text("passwordHash").notNullable()
       table.boolean("isAdministrator").defaultTo(false).notNullable()
