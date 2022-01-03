@@ -26,12 +26,12 @@ const handler = async (req: NextApiRequest, res:NextApiResponse) => {
             const { email, password} = req.body
             let existingUser: UsersData[] = await knex('users').where({email})
             if(!existingUser[0]) {
-                res.status(401).json({message: "email or password are incorrect"} )
+                return res.status(401).json({message: "email or password are incorrect"} )
             }
 
             bcrypt.compare(password, existingUser[0].passwordHash, function(err, result) {
                 if(!result) {
-                    res.status(401).json({message: "email or password are incorrect"})
+                    return res.status(401).json({message: "email or password are incorrect"})
                 }
 
                 else {
@@ -44,7 +44,7 @@ const handler = async (req: NextApiRequest, res:NextApiResponse) => {
                         isPremium: existingUser[0].isPremium
                     }, process.env.JWT_SECRET, {expiresIn: "1d"})
 
-                    res.status(200).json({user: {
+                    return res.status(200).json({user: {
                             id: existingUser[0].id,
                             name: existingUser[0].name,
                             email: existingUser[0].email,
@@ -57,13 +57,13 @@ const handler = async (req: NextApiRequest, res:NextApiResponse) => {
 
         }
 
-        else {
-            res.status(405).json({message: "method not allowed"})
+        if(method !== "POST") {
+            return res.status(405).json({message: "method not allowed"})
         }
 
     } catch (err) {
         // @ts-ignore
-        res.status(500).json(({statusCode: 500, message:err.message}))
+        return res.status(500).json(({statusCode: 500, message:err.message}))
     }
 }
 
