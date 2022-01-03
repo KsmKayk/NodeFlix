@@ -41,7 +41,12 @@ const handler = async (req: NextApiRequest, res:NextApiResponse) => {
 
 
                         knex('users').where({id: id[0]}).then(function (result: UsersData[]) {
-                            res.status(201).json(result[0])
+                            res.status(201).json({
+                                name: result[0].name,
+                                email: result[0].email,
+                                isAdministrator: result[0].isAdministrator,
+                                isPremium: result[0].isPremium
+                            })
                         })
 
 
