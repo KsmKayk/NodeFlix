@@ -2,7 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next"
 import knex from "../../../../database"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import {string} from "prop-types";
+
 
 const saltRounds = 10
 
