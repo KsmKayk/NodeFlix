@@ -1,22 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next"
 import knex from "../../../database"
-import bcrypt from "bcrypt"
-import authenticated from "../../../middlewares/authenticated"
 import administrator from "../../../middlewares/administrator"
-
-const saltRounds = 10
-
-interface UsersData {
-    id: number,
-    name: string,
-    email: string,
-    passwordHash: string,
-    isAdministrator: boolean,
-    isPremium: boolean,
-    lastPaymentAt: string,
-    createdAt: string,
-    updatedAt: string
-}
 
 
 const handler = async (req: NextApiRequest, res:NextApiResponse) => {
