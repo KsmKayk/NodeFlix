@@ -10,6 +10,7 @@ const administrator = (handler) => {
 
         if(token) {
             try {
+                // @ts-ignore
                 let decoded = jwt.verify(token, process.env.JWT_SECRET)
                 // @ts-ignore
                 req.user = decoded;
