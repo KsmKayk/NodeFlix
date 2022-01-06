@@ -4,7 +4,7 @@ exports.up = knex =>
         table.increments("id")
         table.text("name").notNullable()
         table.text("description").notNullable()
-        table.text("thumbnailUrl").notNullable()
+        table.text("episodeUrl").notNullable()
         table.integer("animeId").unsigned().index().references("id").inTable("animes").onDelete("CASCADE").notNullable()
     })
 
